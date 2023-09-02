@@ -12,11 +12,10 @@ export default function (props: Props) {
     return "No color is specified!";
   }
 
-  return <>
-    <h2 style={{ color: props.color }}>
-      Component color is {props.color}.
-    </h2>
-      <p> Let's see someFunction output:{" "}
-      {someFunction()}</p>
-      </>;
+  return (
+    <>
+      <h2 style={{ color: props.color }}>Component color is {props.color}.</h2>
+      <p> Let's see someFunction output: {someFunction()}</p>
+    </>
+  );
 }
