@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src/",
     "paths": { "@/includes/*": ["./includes/*"] },
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "types": [ "near-social-vm-types", "./global.d.ts" ]
   }
 }
