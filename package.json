@@ -18,8 +18,8 @@
     "tsc-files": "^1.1.4"
   },
   "scripts": {
-    "fmt": "prettier --write",
-    "fmt:check": "prettier --check",
+    "fmt": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
+    "fmt:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'",
     "lint": "tsc --pretty --noEmit && eslint .",
     "dev": "~/.cargo/bin/bos-loader devgovgigs.near --path src",
     "build": "npm run fmt && rimraf .bos/transpiled && mkdir -p .bos/transpiled/src && sucrase ./src -d .bos/transpiled/src/npm_package_name --transforms typescript,jsx --jsx-runtime preserve --disable-es-transforms --out-extension jsx && node ./build.js",
