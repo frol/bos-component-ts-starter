@@ -1,8 +1,9 @@
-declare const React: any;
-
 declare interface BosContext {
-    accountId?: string;
-    networkId: NetworkId;
+  accountId?: string;
+  networkId: NetworkId;
 }
 
-declare const Widget: ({ src: string, props: any }) => any;
+declare const Widget: (params: {
+  src: string;
+  props: object;
+}) => React.ReactNode;
