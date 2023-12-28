@@ -58,6 +58,20 @@ Putting all those pieces together, a fully working starter project in TypeScript
 If you develop in VS Code, it should properly highlight issues with types now, and allow you to define your own types to ensure consistency of your code-base.
 Please, [report any problems](https://github.com/frol/bos-component-ts-starter/issues) with VS Code or your editor of choice and contribute fixed by proposing pull requests.
 
+## How to run locally
+
+Learn about [BOS-LOADER](https://docs.near.org/bos/dev/bos-loader) more
+
+1. Change devgovgigs.near to your account name in `package.json`
+   `"dev": "~/.cargo/bin/bos-loader devgovgigs.near --path ./.bos/transpiled/src",`
+2. Open https://near.org/flags, and set the loader URL to http://127.0.0.1:3030
+3. Run `yarn build`
+4. Then run `yarn dev`
+5. Open https://near.org/<youraccount.near>/widget/<component name> (case sensitive)
+   For example `https://near.org/devgovgigs.near/widget/bos-component-ts-starter.components.pages.homepage`
+6. Make changes to the component's code. Repeate steps 2-5 to see the changes.
+
+
 ## How to Use
 
 Learn about [BOS](https://docs.near.org/bos/), and consider building your first components without this starter project as it will be easier to get started with an in-browser playground.
