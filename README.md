@@ -48,15 +48,28 @@ This is a preconfigured project that puts things together:
 You can also find several auxiliary files in this repo:
 
 * [`build.js`](https://github.com/frol/bos-component-ts-starter/blob/main/build.js) handles several useful features:
-  * [x] automatically returns the `export default function` as BOS component, so you don't need to have a free-standing `return <MyComponent props={props} />` statement at the end of your file.
-  * [x] mimics standard `import ... from ...` syntax for files saved in `src/includes/` folder (see how to use imports [here](https://github.com/frol/bos-component-ts-starter/blob/main/src/components/subfolder/my-nested-component.tsx))
-  * [x] automatically adds license, author, and homepage link from package.json to the headers of each BOS component
+  * [X]  automatically returns the `export default function` as BOS component, so you don't need to have a free-standing `return <MyComponent props={props} />` statement at the end of your file.
+  * [X]  mimics standard `import ... from ...` syntax for files saved in `src/includes/` folder (see how to use imports [here](https://github.com/frol/bos-component-ts-starter/blob/main/src/components/subfolder/my-nested-component.tsx))
+  * [X]  automatically adds license, author, and homepage link from package.json to the headers of each BOS component
 * [`tsconfig.json`](https://github.com/frol/bos-component-ts-starter/blob/main/tsconfig.json) is used by VS Code to properly resolve types and project structure
 * [`global.d.ts`](https://github.com/frol/bos-component-ts-starter/blob/main/global.d.ts) is used to inject types of `<Widget>` and `BosContext`, and ignore non-existing React dependency.
 
 Putting all those pieces together, a fully working starter project in TypeScript was born.
 If you develop in VS Code, it should properly highlight issues with types now, and allow you to define your own types to ensure consistency of your code-base.
 Please, [report any problems](https://github.com/frol/bos-component-ts-starter/issues) with VS Code or your editor of choice and contribute fixed by proposing pull requests.
+
+## How to run locally
+
+Learn about [BOS-LOADER](https://docs.near.org/bos/dev/bos-loader) more
+
+1. Change devgovgigs.near to your account name in `package.json`
+   `"dev": "~/.cargo/bin/bos-loader devgovgigs.near --path ./.bos/transpiled/src",`
+2. Open https://near.org/flags, and set the loader URL to http://127.0.0.1:3030
+3. Run `yarn build`
+4. Then run `yarn dev`
+5. Open `https://near.org/<youraccount.near>/widget/<component name>` (case sensitive)
+   For example `https://near.org/devgovgigs.near/widget/bos-component-ts-starter.components.pages.homepage`
+6. Make changes to the component's code. Repeate steps 2-5 to see the changes.
 
 ## How to Use
 
