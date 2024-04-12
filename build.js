@@ -1,4 +1,5 @@
-import fs from "fs";
+import { rename } from "fs/promises";
+import { readFileSync } from "fs";
 import replaceInFiles from "replace-in-files";
 
 const transpiledPathPrefix = ".bos/transpiled/src/npm_package_name";
@@ -22,21 +23,16 @@ async function build() {
   // behavior as replacements are done in parallel and one file may be getting
   // replacements saved while the other file needs to include it, which ends up
   // with empty content includes.
-  await new Promise((resolve) => {
-    fs.rename(
-      `${transpiledPathPrefix}/includes`,
-      `${transpiledPathPrefix}/../includes`,
-      () => {
-        resolve();
-      }
-    );
-  });
+  await rename(
+    `${transpiledPathPrefix}/includes`,
+    `${transpiledPathPrefix}/../includes`
+  );
 
   await replaceInFiles({
     files: [`${transpiledPathPrefix}/**/*.jsx`],
     from: /import .* from "@\/includes\/([^"]*)";/gms,
     to: (_match, importPath) => {
-      const importedFileContent = fs.readFileSync(
+      const importedFileContent = readFileSync(
         `${transpiledPathPrefix}/../includes/${importPath}.jsx`,
         "utf8"
       );
@@ -45,7 +41,7 @@ async function build() {
   });
 
   const packageJson = JSON.parse(
-    fs.readFileSync(new URL("./package.json", import.meta.url))
+    readFileSync(new URL("./package.json", import.meta.url)).toString()
   );
 
   await replaceInFiles({
@@ -54,15 +50,10 @@ async function build() {
     to: `/*\nLicense: ${packageJson.license}\nAuthor: ${packageJson.author}\nHomepage: ${packageJson.homepage}\n*/\n`,
   });
 
-  await new Promise((resolve) => {
-    fs.rename(
-      transpiledPathPrefix,
-      `${transpiledPathPrefix}/../${packageJson.name}`,
-      () => {
-        resolve();
-      }
-    );
-  });
+  await rename(
+    transpiledPathPrefix,
+    `${transpiledPathPrefix}/../${packageJson.name}`
+  );
 
   console.log("DONE");
 }
