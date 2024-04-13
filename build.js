@@ -5,20 +5,6 @@ import replaceInFiles from "replace-in-files";
 const transpiledPathPrefix = ".bos/transpiled/src";
 
 async function build() {
-  await replaceInFiles({
-    files: [`${transpiledPathPrefix}/**/*.jsx`],
-    from: /export\s+default\s+function[^(]*\((.*)/gms,
-    to: (_match, rest) =>
-      `function MainComponent(${rest}\nreturn MainComponent(props, context);`,
-  });
-
-  await replaceInFiles({
-    files: [`${transpiledPathPrefix}/**/*.jsx`],
-    from: /export /g,
-    // NOTE: Empty string is ignored, so we use a function workaround it
-    to: () => "",
-  });
-
   // WARNING: Don't allow "imports" in includes as this may lead to undefined
   // behavior as replacements are done in parallel and one file may be getting
   // replacements saved while the other file needs to include it, which ends up
@@ -27,6 +13,19 @@ async function build() {
     `${transpiledPathPrefix}/includes`,
     `${transpiledPathPrefix}/../includes`
   );
+
+  await replaceInFiles({
+    files: [`${transpiledPathPrefix}/**/*.jsx`],
+    from: /export\s+default\s+function[^(]*\((.*)/gms,
+    to: (_match, rest) =>
+      `function MainComponent(${rest}\nreturn MainComponent(props, context);`,
+  });
+
+  await replaceInFiles({
+    files: [`${transpiledPathPrefix}/../includes/**/*.jsx`],
+    from: /^export.*function/gm,
+    to: "function",
+  });
 
   await replaceInFiles({
     files: [`${transpiledPathPrefix}/**/*.jsx`],
