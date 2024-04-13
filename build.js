@@ -2,7 +2,7 @@ import { rename } from "fs/promises";
 import { readFileSync } from "fs";
 import replaceInFiles from "replace-in-files";
 
-const transpiledPathPrefix = ".bos/transpiled/src/npm_package_name";
+const transpiledPathPrefix = ".bos/transpiled/src";
 
 async function build() {
   await replaceInFiles({
@@ -49,11 +49,6 @@ async function build() {
     from: /^/m,
     to: `/*\nLicense: ${packageJson.license}\nAuthor: ${packageJson.author}\nHomepage: ${packageJson.homepage}\n*/\n`,
   });
-
-  await rename(
-    transpiledPathPrefix,
-    `${transpiledPathPrefix}/../${packageJson.name}`
-  );
 
   console.log("DONE");
 }
