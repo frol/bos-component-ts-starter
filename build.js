@@ -30,7 +30,7 @@ async function build() {
 
   await replaceInFiles({
     files: [`${transpiledPathPrefix}/**/*.jsx`],
-    from: /import .* from "@\/includes\/([^"]*)";/gms,
+    from: /import .* from "@\/includes\/([^"]*)";/gm,
     to: (_match, importPath) => {
       const importedFileContent = readFileSync(
         `${transpiledPathPrefix}/../includes/${importPath}.jsx`,
