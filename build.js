@@ -1,6 +1,8 @@
 import { rename } from "fs/promises";
 import { readFileSync } from "fs";
 import replaceInFiles from "replace-in-files";
+import { relative } from "path";
+import { exit } from "process";
 
 const transpiledPathPrefix = ".bos/transpiled/src";
 
@@ -19,6 +21,51 @@ async function build() {
     from: /export\s+default\s+function[^(]*\((.*)/gms,
     to: (_match, rest) =>
       `function MainComponent(${rest}\nreturn MainComponent(props, context);`,
+  });
+
+  // Check for default exports in includes
+  await replaceInFiles({
+    files: [`${transpiledPathPrefix}/../includes/**/*.jsx`],
+    from: /^export default function\s?([^(]*)/gm,
+    to: (match, defaultFunctionName, _num, _text, filePath) => {
+      const relativeFilePath = relative(".bos/transpiled", filePath);
+      console.warn(
+        `Using default exports for utils functions isn't recommended as it may cause unexpected import issues - please replace "export default function ${defaultFunctionName}" with "export function ${defaultFunctionName}" in the "${relativeFilePath}" file`
+      );
+
+      return match;
+    },
+  });
+
+  // check for exports across the whole project
+  await replaceInFiles({
+    files: [
+      `${transpiledPathPrefix}/**/*.jsx`,
+      `${transpiledPathPrefix}/../includes/**/*.jsx`,
+    ],
+    from: /^export .* from ".*";/gm,
+    to: (match, _num, _text, filePath) => {
+      const relativeFilePath = relative(".bos/transpiled", filePath);
+      console.error(
+        `Exports aren't allowed as this may lead to undefined behavior - please remove '${match}' in the '${relativeFilePath}' file`
+      );
+
+      exit(1);
+    },
+  });
+
+  // check for import in includes
+  await replaceInFiles({
+    files: [`${transpiledPathPrefix}/../includes/**/*.jsx`],
+    from: /^import .* from ".*";/gm,
+    to: (match, _num, _text, filePath) => {
+      const relativeFilePath = relative(".bos/transpiled", filePath);
+      console.error(
+        `Imports in includes aren't allowed as this may lead to undefined behavior - please remove "${match}" in the "${relativeFilePath}" file`
+      );
+
+      exit(1);
+    },
   });
 
   await replaceInFiles({
