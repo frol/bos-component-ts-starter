@@ -22,8 +22,9 @@
     "fmt:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'",
     "lint": "tsc --pretty --noEmit && eslint .",
     "dev": "~/.cargo/bin/bos-loader devgovgigs.near --path ./.bos/transpiled/src",
-    "prebuild": "npm run fmt && rimraf .bos/transpiled && mkdir -p .bos/transpiled/src",
-    "build": "sucrase ./src -d .bos/transpiled/src --transforms typescript,jsx --jsx-runtime preserve --disable-es-transforms --out-extension jsx && node ./build.js",
+    "prebuild": "rimraf .bos/transpiled && mkdir -p .bos/transpiled/src && npm run lint",
+    "build": "sucrase ./src -d .bos/transpiled/src --transforms typescript,jsx --jsx-runtime preserve --disable-es-transforms --out-extension jsx",
+    "postbuild": "npm run fmt && node ./build.js",
     "predeploy": "npm run build",
     "deploy": "cd .bos/transpiled && bos components deploy",
     "prepare": "husky install"
