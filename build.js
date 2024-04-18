@@ -1,6 +1,7 @@
 import { rename } from "fs/promises";
 import { readFileSync } from "fs";
 import replaceInFiles from "replace-in-files";
+import { colorize } from "colorize-node";
 import { relative } from "path";
 import { exit } from "process";
 
@@ -30,7 +31,9 @@ async function build() {
     to: (match, defaultFunctionName, _num, _text, filePath) => {
       const relativeFilePath = relative(".bos/transpiled", filePath);
       console.warn(
-        `Using default exports for utils functions isn't recommended as it may cause unexpected import issues - please replace "export default function ${defaultFunctionName}" with "export function ${defaultFunctionName}" in the "${relativeFilePath}" file`
+        colorize.yellow(
+          `Using default exports for utils functions isn't recommended as it may cause unexpected import issues - please replace "export default function ${defaultFunctionName}" with "export function ${defaultFunctionName}" in the "${relativeFilePath}" file`
+        )
       );
 
       return match;
@@ -47,7 +50,9 @@ async function build() {
     to: (match, _num, _text, filePath) => {
       const relativeFilePath = relative(".bos/transpiled", filePath);
       console.error(
-        `Exports aren't allowed as this may lead to undefined behavior - please remove '${match}' in the '${relativeFilePath}' file`
+        colorize.redBright(
+          `Exports aren't allowed as this may lead to undefined behavior - please remove '${match}' in the '${relativeFilePath}' file`
+        )
       );
 
       exit(1);
@@ -61,7 +66,9 @@ async function build() {
     to: (match, _num, _text, filePath) => {
       const relativeFilePath = relative(".bos/transpiled", filePath);
       console.error(
-        `Imports in includes aren't allowed as this may lead to undefined behavior - please remove "${match}" in the "${relativeFilePath}" file`
+        colorize.redBright(
+          `Imports in includes aren't allowed as this may lead to undefined behavior - please remove "${match}" in the "${relativeFilePath}" file`
+        )
       );
 
       exit(1);
