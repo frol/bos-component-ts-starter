@@ -22,7 +22,7 @@
     "fmt": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
     "fmt:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'",
     "lint": "tsc --pretty --noEmit && eslint .",
-    "dev": "~/.cargo/bin/bos-loader devgovgigs.near --path ./.bos/transpiled/src",
+    "dev": "~/.cargo/bin/bos-loader dev.near --path ./.bos/transpiled/src",
     "prebuild": "rimraf .bos/transpiled && mkdir -p .bos/transpiled/src && npm run lint",
     "build": "sucrase ./src -d .bos/transpiled/src --transforms typescript,jsx --jsx-runtime preserve --disable-es-transforms --out-extension jsx",
     "postbuild": "npm run fmt && node ./build.js",

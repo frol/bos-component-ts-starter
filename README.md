@@ -68,7 +68,7 @@ Learn about [BOS-LOADER](https://docs.near.org/bos/dev/bos-loader) more
 3. Run `yarn build`
 4. Then run `yarn dev`
 5. Open `https://near.org/<youraccount.near>/widget/<component name>` (case sensitive)
-   For example `https://near.org/devgovgigs.near/widget/bos-component-ts-starter.components.pages.homepage`
+   For example `https://near.org/dev.near/widget/components.pages.homepage`
 6. Make changes to the component's code. Repeate steps 2-5 to see the changes.
 
 ## How to Use
