@@ -81,6 +81,18 @@ Once you are ready to build a complex app on BOS using TypeScript:
 3. Edit components
 4. Deploy: `npm run deploy` - [bos CLI](https://bos.cli.rs) will interactively ask for the details like which account you want to deploy the components to and how to sign the transaction
 
+## Deployment
+
+This preconfigured repository implements a GitHub workflow for automated deployment of components into the testnet network. The workflow is triggered by pushing changes to the `main` branch.
+
+A few essential environment variables and secret values [must be specified in the repository settings](https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository) for the workflow to function correctly:
+
+- `TESTNET_ACCOUNT_ID`: Specifies the account to deploy components to
+- `TESTNET_ACCOUNT_PUBLIC_KEY`: Public key from the signer account (to which components are being deployed)
+- `TESTNET_ACCOUNT_PRIVATE_KEY`: Private key from the signer account (to which components are being deployed)
+
+This workflow serves as an example to demonstrate the implementation of an automated deployment to the testnet network, and it can be easily adapted for deployment to the mainnet.
+
 ## Troubleshooting
 
 [`npm run build`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L17) command will create `.bos` folder in the root of the project, and you can inspect the generated JSX code there.

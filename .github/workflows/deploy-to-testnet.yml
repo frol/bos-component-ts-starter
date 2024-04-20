@@ -1,0 +1,36 @@
+name: Deploy Widgets to Testnet
+on:
+  push:
+    branches:
+      - main
+
+env:
+  ACCOUNT_ID: ${{ vars.TESTNET_ACCOUNT_ID }}
+  ACCOUNT_PUBLIC_KEY: ${{ vars.TESTNET_ACCOUNT_PUBLIC_KEY }}
+  ACCOUNT_PRIVATE_KEY: ${{ secrets.TESTNET_ACCOUNT_PRIVATE_KEY }}
+  NETWORK: testnet
+
+jobs:
+  deploy-widgets:
+    runs-on: ubuntu-latest
+    name: Deploy widgets to $ACCOUNT_ID
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install --frozen--lockfile
+
+      - name: Build
+        run: npm build
+
+      - name: Install bos CLI
+        run: |
+          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/FroVolod/bos-cli-rs/releases/download/v0.3.2/bos-cli-installer.sh | sh
+
+      - name: Deploy widgets
+        run: |
+          which bos
+          echo $PATH
+          cd .bos/transpiled && bos components deploy "$ACCOUNT_ID" sign-as "$ACCOUNT_ID" network-config "$NETWORK" sign-with-plaintext-private-key --signer-public-key "$ACCOUNT_PUBLIC_KEY" --signer-private-key "$ACCOUNT_PRIVATE_KEY" send
