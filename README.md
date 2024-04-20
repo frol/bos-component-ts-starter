@@ -30,7 +30,7 @@ export default function (props: Props, context: BosContext) {
         </a>
       </p>
       <Widget
-        src="devgovgigs.near/widget/components.subfolder.my-nested-component"
+        src="dev.near/widget/components.subfolder.my-nested-component"
         props={{ color: "green" }}
       />
     </>
