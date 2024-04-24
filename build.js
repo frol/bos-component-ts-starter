@@ -4,6 +4,37 @@ import replaceInFiles from "replace-in-files";
 const transpiledPathPrefix = ".bos/transpiled/src/npm_package_name";
 
 async function build() {
+  const network = process.env.NETWORK || "dev";
+  const replacementsFile = `replacements.${network}.json`;
+
+  console.log(`Reading configuration from ${replacementsFile} file`);
+
+  if (!fs.existsSync(replacementsFile)) {
+    console.error(`Error: ${replacementsFile} file not found.`);
+    process.exit(1);
+  }
+
+  // Read the content of the .json file
+  let replacements = JSON.parse(fs.readFileSync(replacementsFile, "utf8"));
+
+  // iterate over each .jsx file to update replacements
+  await replaceInFiles({
+    files: [`${transpiledPathPrefix}/**/*.jsx`],
+    from: /\$\{(REPL_[^}]*)\}/gm,
+    to: (_match, variableName) => {
+      const value = replacements[variableName];
+
+      if (typeof value === "undefined") {
+        console.warn(
+          `Missing value in replacements file for ${variableName} key`
+        );
+        return _match;
+      }
+
+      return value;
+    },
+  });
+
   await replaceInFiles({
     files: [`${transpiledPathPrefix}/**/*.jsx`],
     from: /export\s+default\s+function[^(]*\((.*)/gms,

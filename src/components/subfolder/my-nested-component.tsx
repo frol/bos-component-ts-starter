@@ -16,6 +16,7 @@ export default function (props: Props) {
     <>
       <h2 style={{ color: props.color }}>Component color is {props.color}.</h2>
       <p> Let's see someFunction output: {someFunction()}</p>
+      <p> Let's see actual value of REPL_TEST: {"${REPL_TEST}"}</p>
     </>
   );
 }
