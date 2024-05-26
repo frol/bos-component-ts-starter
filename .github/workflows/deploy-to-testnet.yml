@@ -2,7 +2,7 @@ name: Deploy Widgets to Testnet
 on:
   push:
     branches:
-      - main
+      - develop
 
 env:
   ACCOUNT_ID: ${{ vars.TESTNET_ACCOUNT_ID }}
