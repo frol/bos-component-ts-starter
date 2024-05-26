@@ -40,19 +40,19 @@ export default function (props: Props, context: BosContext) {
 
 This is a preconfigured project that puts things together:
 
-* [sucrase](https://sucrase.io/) is the heart of this starter project that transpiles TSX syntax to JSX
-* [near-social-vm-types](https://www.npmjs.com/package/near-social-vm-types) defines BOS VM API as TypeScript types
-* [bos CLI](https://bos.cli.rs) helps to deploy local files all at once to [SocialDB](https://github.com/NearSocial/social-db) (use [`npm run deploy`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L18))
-* [prettier](https://prettier.io/) helps to keep the code nicely formatted (use [`npm run fmt` and `npm run fmt:check`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L14-L15))
+- [sucrase](https://sucrase.io/) is the heart of this starter project that transpiles TSX syntax to JSX
+- [near-social-vm-types](https://www.npmjs.com/package/near-social-vm-types) defines BOS VM API as TypeScript types
+- [bos CLI](https://bos.cli.rs) helps to deploy local files all at once to [SocialDB](https://github.com/NearSocial/social-db) (use [`npm run deploy`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L18))
+- [prettier](https://prettier.io/) helps to keep the code nicely formatted (use [`npm run fmt` and `npm run fmt:check`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L14-L15))
 
 You can also find several auxiliary files in this repo:
 
-* [`build.js`](https://github.com/frol/bos-component-ts-starter/blob/main/build.js) handles several useful features:
-  * [X]  automatically returns the `export default function` as BOS component, so you don't need to have a free-standing `return <MyComponent props={props} />` statement at the end of your file.
-  * [X]  mimics standard `import ... from ...` syntax for files saved in `src/includes/` folder (see how to use imports [here](https://github.com/frol/bos-component-ts-starter/blob/main/src/components/subfolder/my-nested-component.tsx))
-  * [X]  automatically adds license, author, and homepage link from package.json to the headers of each BOS component
-* [`tsconfig.json`](https://github.com/frol/bos-component-ts-starter/blob/main/tsconfig.json) is used by VS Code to properly resolve types and project structure
-* [`global.d.ts`](https://github.com/frol/bos-component-ts-starter/blob/main/global.d.ts) is used to inject types of `<Widget>` and `BosContext`, and ignore non-existing React dependency.
+- [`build.js`](https://github.com/frol/bos-component-ts-starter/blob/main/build.js) handles several useful features:
+  - [x] automatically returns the `export default function` as BOS component, so you don't need to have a free-standing `return <MyComponent props={props} />` statement at the end of your file.
+  - [x] mimics standard `import ... from ...` syntax for files saved in `src/includes/` folder (see how to use imports [here](https://github.com/frol/bos-component-ts-starter/blob/main/src/components/subfolder/my-nested-component.tsx))
+  - [x] automatically adds license, author, and homepage link from package.json to the headers of each BOS component
+- [`tsconfig.json`](https://github.com/frol/bos-component-ts-starter/blob/main/tsconfig.json) is used by VS Code to properly resolve types and project structure
+- [`global.d.ts`](https://github.com/frol/bos-component-ts-starter/blob/main/global.d.ts) is used to inject types of `<Widget>` and `BosContext`, and ignore non-existing React dependency.
 
 Putting all those pieces together, a fully working starter project in TypeScript was born.
 If you develop in VS Code, it should properly highlight issues with types now, and allow you to define your own types to ensure consistency of your code-base.
@@ -83,7 +83,11 @@ Once you are ready to build a complex app on BOS using TypeScript:
 
 ## Deployment
 
-This preconfigured repository implements a GitHub workflow for automated deployment of components into the testnet network. The workflow is triggered by pushing changes to the `main` branch.
+This preconfigured repository implements GitHub workflows for automated deployment of components.
+
+### Testnet
+
+The workflow is triggered by pushing changes to the `develop` branch.
 
 A few essential environment variables and secret values [must be specified in the repository settings](https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository) for the workflow to function correctly:
 
@@ -91,7 +95,15 @@ A few essential environment variables and secret values [must be specified in th
 - `TESTNET_ACCOUNT_PUBLIC_KEY`: Public key from the signer account (to which components are being deployed)
 - `TESTNET_ACCOUNT_PRIVATE_KEY`: Private key from the signer account (to which components are being deployed)
 
-This workflow serves as an example to demonstrate the implementation of an automated deployment to the testnet network, and it can be easily adapted for deployment to the mainnet.
+### Mainnet
+
+The workflow is triggered by pushing changes to the `main` branch.
+
+A few essential environment variables and secret values [must be specified in the repository settings](https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository) for the workflow to function correctly:
+
+- `MAINNET_ACCOUNT_ID`: Specifies the account to deploy components to
+- `MAINNET_ACCOUNT_PUBLIC_KEY`: Public key from the signer account (to which components are being deployed)
+- `MAINNET_ACCOUNT_PRIVATE_KEY`: Private key from the signer account (to which components are being deployed)
 
 ## Troubleshooting
 
