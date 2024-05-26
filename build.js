@@ -13,7 +13,7 @@ async function build() {
 
   await replaceInFiles({
     files: [`${transpiledPathPrefix}/**/*.jsx`],
-    from: /^export /,
+    from: /^export /gm,
     // NOTE: Empty string is ignored, so we use a function workaround it
     to: () => "",
   });
