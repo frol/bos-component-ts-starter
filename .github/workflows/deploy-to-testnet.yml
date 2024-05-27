@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - develop
+  workflow_dispatch:  
 
 env:
   ACCOUNT_ID: ${{ vars.TESTNET_ACCOUNT_ID }}
