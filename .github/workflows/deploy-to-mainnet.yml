@@ -20,17 +20,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: npm install --frozen--lockfile
+        run: npm ci
 
       - name: Build
         run: npm build
 
-      - name: Install bos CLI
-        run: |
-          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/FroVolod/bos-cli-rs/releases/download/v0.3.2/bos-cli-installer.sh | sh
-
       - name: Deploy widgets
         run: |
-          which bos
-          echo $PATH
-          cd .bos/transpiled && bos components deploy "$ACCOUNT_ID" sign-as "$ACCOUNT_ID" network-config "$NETWORK" sign-with-plaintext-private-key --signer-public-key "$ACCOUNT_PUBLIC_KEY" --signer-private-key "$ACCOUNT_PRIVATE_KEY" send
+        npm run deploy -- "$ACCOUNT_ID" sign-as "$ACCOUNT_ID" network-config "$NETWORK" sign-with-plaintext-private-key --signer-public-key "$ACCOUNT_PUBLIC_KEY" --signer-private-key "$ACCOUNT_PRIVATE_KEY" send
