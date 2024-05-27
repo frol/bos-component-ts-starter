@@ -1,0 +1,29 @@
+name: Deploy Widgets to Testnet
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  ACCOUNT_ID: ${{ vars.TESTNET_ACCOUNT_ID }}
+  ACCOUNT_PUBLIC_KEY: ${{ vars.TESTNET_ACCOUNT_PUBLIC_KEY }}
+  ACCOUNT_PRIVATE_KEY: ${{ secrets.TESTNET_ACCOUNT_PRIVATE_KEY }}
+  NETWORK: testnet
+
+jobs:
+  deploy-widgets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy widgets
+        run: |
+          npm run deploy -- "$ACCOUNT_ID" sign-as "$ACCOUNT_ID" network-config "$NETWORK" sign-with-plaintext-private-key --signer-public-key "$ACCOUNT_PUBLIC_KEY" --signer-private-key "$ACCOUNT_PRIVATE_KEY" send
