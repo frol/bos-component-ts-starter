@@ -10,7 +10,7 @@
     "eslint": "^8.48.0",
     "husky": "^8.0.0",
     "lint-staged": "^14.0.1",
-    "near-social-vm-types": "^1.0.0",
+    "near-social-vm-types": "^1.1.0",
     "prettier": "^2.8.4",
     "replace-in-files": "^3.0.0",
     "rimraf": "^5.0.1",
