@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - develop
-  workflow_dispatch:  
+  workflow_dispatch:
 
 env:
   ACCOUNT_ID: ${{ vars.TESTNET_ACCOUNT_ID }}
@@ -14,7 +14,6 @@ env:
 jobs:
   deploy-widgets:
     runs-on: ubuntu-latest
-    name: Deploy widgets to $ACCOUNT_ID
 
     steps:
       - name: Checkout repository

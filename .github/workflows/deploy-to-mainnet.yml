@@ -13,7 +13,6 @@ env:
 jobs:
   deploy-widgets:
     runs-on: ubuntu-latest
-    name: Deploy widgets to $ACCOUNT_ID
 
     steps:
       - name: Checkout repository
