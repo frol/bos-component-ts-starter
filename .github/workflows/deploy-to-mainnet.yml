@@ -27,4 +27,4 @@ jobs:
 
       - name: Deploy widgets
         run: |
-        npm run deploy -- "$ACCOUNT_ID" sign-as "$ACCOUNT_ID" network-config "$NETWORK" sign-with-plaintext-private-key --signer-public-key "$ACCOUNT_PUBLIC_KEY" --signer-private-key "$ACCOUNT_PRIVATE_KEY" send
+          npm run deploy -- "$ACCOUNT_ID" sign-as "$ACCOUNT_ID" network-config "$NETWORK" sign-with-plaintext-private-key --signer-public-key "$ACCOUNT_PUBLIC_KEY" --signer-private-key "$ACCOUNT_PRIVATE_KEY" send
