@@ -14,7 +14,7 @@ interface Props {
 }
 
 // Just create a default export function (no need to `return` it, see `.bos`
-// folder after `npm run build` if you want to understand what is happening)
+// folder after `pnpm run build` if you want to understand what is happening)
 export default function (props: Props, context: BosContext) {
   return (
     <>
@@ -42,7 +42,7 @@ This is a preconfigured project that puts things together:
 
 - [sucrase](https://sucrase.io/) is the heart of this starter project that transpiles TSX syntax to JSX
 - [near-social-vm-types](https://www.npmjs.com/package/near-social-vm-types) defines BOS VM API as TypeScript types
-- [bos CLI](https://bos.cli.rs) helps to deploy local files all at once to [SocialDB](https://github.com/NearSocial/social-db) (use [`npm run deploy`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L18))
+- [bos CLI](https://bos.cli.rs) helps to deploy local files all at once to [SocialDB](https://github.com/NearSocial/social-db) (use [`pnpm run deploy`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L18))
 - [prettier](https://prettier.io/) helps to keep the code nicely formatted (use [`npm run fmt` and `npm run fmt:check`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L14-L15))
 
 You can also find several auxiliary files in this repo:
@@ -65,11 +65,11 @@ Learn about [BOS-LOADER](https://docs.near.org/bos/dev/bos-loader) more
 1. Change devgovgigs.near to your account name in `package.json`
    `"dev": "~/.cargo/bin/bos-loader devgovgigs.near --path ./.bos/transpiled/src",`
 2. Open https://near.org/flags, and set the loader URL to http://127.0.0.1:3030
-3. Run `yarn build`
-4. Then run `yarn dev`
+3. Run `pnpm build`
+4. Then run `pnpm dev`
 5. Open `https://near.org/<youraccount.near>/widget/<component name>` (case sensitive)
    For example `https://near.org/devgovgigs.near/widget/bos-component-ts-starter.components.pages.homepage`
-6. Make changes to the component's code. Repeate steps 2-5 to see the changes.
+6. Make changes to the component's code. Repeat steps 2-5 to see the changes.
 
 ## How to Use
 
@@ -77,9 +77,9 @@ Learn about [BOS](https://docs.near.org/bos/), and consider building your first 
 Once you are ready to build a complex app on BOS using TypeScript:
 
 1. Fork this project
-2. Install dependencies: `npm install`
+2. Install dependencies: `pnpm install`
 3. Edit components
-4. Deploy: `npm run deploy` - [bos CLI](https://bos.cli.rs) will interactively ask for the details like which account you want to deploy the components to and how to sign the transaction
+4. Deploy: `pnpm run deploy` - [bos CLI](https://bos.cli.rs) will interactively ask for the details like which account you want to deploy the components to and how to sign the transaction
 
 ## Deployment
 
@@ -107,7 +107,7 @@ A few essential environment variables and secret values [must be specified in th
 
 ## Troubleshooting
 
-[`npm run build`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L17) command will create `.bos` folder in the root of the project, and you can inspect the generated JSX code there.
+[`pnpm run build`](https://github.com/frol/bos-component-ts-starter/blob/beb7e6722c46dc53282c9e42b5388fe4ad16819e/package.json#L17) command will create `.bos` folder in the root of the project, and you can inspect the generated JSX code there.
 
 ## License
 

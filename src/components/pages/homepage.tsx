@@ -6,7 +6,7 @@ interface Props {
 }
 
 // Just create a default export function (no need to `return` it, see `.bos`
-// folder after `npm run build` if you want to understand what is happening)
+// folder after `pnpm run build` if you want to understand what is happening)
 export default function (props: Props, context: BosContext) {
   return (
     <>
