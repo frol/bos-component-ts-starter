@@ -10,7 +10,7 @@ jobs:
     name: Sanity Checks
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/setup.yml@main
+      - uses: ./.github/workflows/setup.yml
 
       - name: Install dependencies
         run: pnpm install
