@@ -6,12 +6,13 @@ on:
       - main
 
 jobs:
+  prepare_environment:
+    name: Setup
+    uses: ./.github/workflows/setup.yml
   sanity_checks:
     name: Sanity Checks
     runs-on: ubuntu-latest
     steps:
-      - name: Call Setup Workflow
-        uses: ./.github/workflows/setup.yml
       - name: Install dependencies
         run: pnpm install
       - name: Run code formatting check

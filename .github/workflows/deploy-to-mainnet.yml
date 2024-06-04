@@ -11,6 +11,10 @@ env:
   NETWORK: mainnet
 
 jobs:
+  prepare_environment:
+    name: Setup
+    uses: ./.github/workflows/setup.yml
+
   deploy-widgets:
     runs-on: ubuntu-latest
 
