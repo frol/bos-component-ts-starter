@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup
+      - name: Call Setup Workflow
         uses: ./.github/workflows/setup.yml
 
       - name: Install dependencies
