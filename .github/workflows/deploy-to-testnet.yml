@@ -14,9 +14,10 @@ jobs:
   prepare_environment:
     name: Setup
     uses: ./.github/workflows/setup.yml
-    
+
   deploy-widgets:
     runs-on: ubuntu-latest
+    needs: prepare_environment
 
     steps:
       - name: Call Setup Workflow

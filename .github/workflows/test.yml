@@ -11,6 +11,7 @@ jobs:
     uses: ./.github/workflows/setup.yml
   sanity_checks:
     name: Sanity Checks
+    needs: prepare_environment
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
