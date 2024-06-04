@@ -11,17 +11,11 @@ env:
   NETWORK: testnet
 
 jobs:
-  prepare_environment:
-    name: Setup
-    uses: ./.github/workflows/setup.yml
-
   deploy-widgets:
     runs-on: ubuntu-latest
-    needs: prepare_environment
-
     steps:
-      - name: Call Setup Workflow
-        uses: ./.github/workflows/setup.yml
+      - name: Setup pnpm and Node.js
+        uses: ./.github/actions/setup-pnpm-node
 
       - name: Install dependencies
         run: pnpm install

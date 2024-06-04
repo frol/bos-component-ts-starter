@@ -6,14 +6,12 @@ on:
       - main
 
 jobs:
-  prepare_environment:
-    name: Setup
-    uses: ./.github/workflows/setup.yml
   sanity_checks:
     name: Sanity Checks
-    needs: prepare_environment
     runs-on: ubuntu-latest
     steps:
+      - name: Setup pnpm and Node.js
+        uses: ./.github/actions/setup-pnpm-node
       - name: Install dependencies
         run: pnpm install
       - name: Run code formatting check
