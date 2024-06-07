@@ -65,8 +65,8 @@ Learn about [BOS-LOADER](https://docs.near.org/bos/dev/bos-loader) more
 1. Change devgovgigs.near to your account name in `package.json`
    `"dev": "~/.cargo/bin/bos-loader devgovgigs.near --path ./.bos/transpiled/src",`
 2. Open https://near.org/flags, and set the loader URL to http://127.0.0.1:3030
-3. Run `yarn build`
-4. Then run `yarn dev`
+3. Run `npm run build`
+4. Then run `npm run dev`
 5. Open `https://near.org/<youraccount.near>/widget/<component name>` (case sensitive)
    For example `https://near.org/devgovgigs.near/widget/bos-component-ts-starter.components.pages.homepage`
 6. Make changes to the component's code. Repeate steps 2-5 to see the changes.
